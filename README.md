@@ -29,6 +29,14 @@
 </details>
 
 # Установщик AUR
+<details>
+
+<summary>tags</summary>
+
+`AUR`, `yay`, `paru`, `install`
+
+</details>
+
 AUR - пользовательский репозиторий ARCH (дистрибутив на котором основан CachyOS). В нем пользователи могу публиковать свои собственные приложения, которых нет в официальном репозитории.
 
 > [!WARNING]
@@ -43,16 +51,31 @@ sudo pacman -S yay
 > Когда вы устанавливаете что-то через yay, зачастую будет достаточно просто везде прокликать `Enter`.
 
 # Установка Google Chrome
+<details>
+
+<summary>tags</summary>
+
+`chrome`, `google chrome`, `google-chrome`, `browsers`
+
+</details>
+
 Google Chrome браузер - думаю что-то дополнительно говорить излишне.
 
 **Предварительные требования**
-- Установщик AUR (paru или yay)
+- [Установщик AUR (paru или yay)](#установщик-aur)
 
 ```shell
 yay -S google-chrome
 ```
 
 # Установка Discord
+<details>
+
+<summary>tags</summary>
+
+`discord`, `messanger`
+
+</details>
 Discord - думаю что-то дополнительно говорить излишне
 
 ```shell
@@ -83,6 +106,14 @@ nano ~/.config/discord/settings.json
 ```
 
 # Установка Telegram
+<details>
+
+<summary>tags</summary>
+
+`telegram`, `messanger`
+
+</details>
+
 Telegram - думаю что-то дополнительно говорить излишне.
 
 ```shell
@@ -90,6 +121,14 @@ sudo pacman -S --needed telegram-desktop
 ```
 
 # Настройка Wireguard VPN
+<details>
+
+<summary>tags</summary>
+
+`wireuard`, `wireguard vpn`, `vpn`
+
+</details>
+
 В CachyOS по-умолчнию используется network manager, которые имеет поддержку wireguard.
 1. Открыть настройки системы -> "wifi и интернет" -> "Wifi и сеть"
 2. В подключениях нажать кнопку `+` снизу -> прокрутить в самый низ и выбрать `wireguard`
@@ -140,22 +179,46 @@ sudo pacman -S --needed telegram-desktop
 > Иногда туннель начинает работать только после перезагрузки компьютера. Если сейчас не заработал - попробуйте перезагрузиться.
 
 # Установка throne (v2ray/nekoray/nekobox)
+<details>
+
+<summary>tags</summary>
+
+`throne`, `throne vpn`, `vpn`, `xray`, `nekoray`, `v2ray`, `nekobox`, `vless`
+
+</details>
+
 Throne - форк nekoray или альтернатива для v2ray
 
 **Предварительные требования**
-- Установщик AUR (paru или yay)
+- [Установщик AUR (paru или yay)](#установщик-aur)
 
 ```shell
 yay -S throne
 ```
 
 # Установка аналога Paint (KolourPaint)
+<details>
+
+<summary>tags</summary>
+
+`paint`, `KolourPaint`, `draw`
+
+</details>
+
 KolourPaint - пожалуй самое близкое к оригинальному Paint на Windows.
 ```shell
 sudo pacman -S --needed kolourpaint
 ```
 
 # Установка OBS (запись видео)
+<details>
+
+<summary>tags</summary>
+
+`obs`, `video recording`
+
+</details>
+
 OBS - самое популярное средство для записи видео и стриминга.
 
 > [!NOTE]
@@ -172,16 +235,32 @@ sudo pacman -S obs-studio-browser
 > При установке может возникнуть запрос на несовместимость пакетов. Отвечайте что да, заменить пакет
 
 # Установка Visual Studio Code (VSCode)
+<details>
+
+<summary>tags</summary>
+
+`vscode`, `visual studio`, `vs code`, `visual studio code`, `text editor`
+
+</details>
+
 VSCode - один из самых популярных текстовых редакторов
 
 **Предварительные требования**
-- Установщик AUR (paru или yay)
+- [Установщик AUR (paru или yay)](#установщик-aur)
 
 ```shell
 yay -S visual-studio-code-bin
 ```
 
 # Установка docker и docker-compose
+<details>
+
+<summary>tags</summary>
+
+`docker`, `docker-compose`, `docker-build`, `containers`
+
+</details>
+
 Docker - средство для управления контейнерами (изолированными процессами и ресурсами) (практически как ВМ, но без эмуляции "железа"). Так как в официальной документации нет информации по установке в arch-based дистрибутивы, то весь наиболее используемый набор ставится этой командой:
 ```shell
 sudo pacman -S --needed docker docker-buildx docker-compose
@@ -203,6 +282,13 @@ systemctl status docker
 ```
 
 ### Лимит логов для docker контейнеров
+<details>
+
+<summary>tags</summary>
+
+`docker logs`, `docker logging`, `logs`
+
+</details>
 Ограничить лимит логов, чтобы логи контейнеров не сожрали всё доступное место
 ```shell
 sudo mkdir -p /etc/docker
@@ -312,7 +398,7 @@ For more examples and ideas, visit:
 ### Настройка
 
 **Предварительные требования**
-- Установщик AUR (paru или yay)
+- [Установщик AUR (paru или yay)](#установщик-aur)
 
 0. Сделайте снапшот или бекап
 

@@ -85,5 +85,19 @@
 			"</details>"
 		],
 		"description": "Insert expand block"
+	},
+	"tags-block": {
+		"scope": "markdown",
+		"prefix": "tags-block",
+		"body": [
+			"<details>",
+			"",
+			"<summary>tags</summary>",
+			"",
+			"`$0`",
+			"",
+			"</details>"
+		],
+		"description": "Insert expand block"
 	}
 }
