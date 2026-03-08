@@ -4,6 +4,13 @@
 
 <summary>Оглавление</summary>
 
+- [Установщик AUR](#установщик-aur)
+- [Установка Google Chrome](#установка-google-chrome)
+- [Установка docker и docker-compose](#установка-docker-и-docker-compose)
+  - [Донастройка](#донастройка)
+    - [Добавление в группу docker](#добавление-в-группу-docker)
+    - [Включение docker демона при запуске системы](#включение-docker-демона-при-запуске-системы)
+    - [Лимит логов для docker контейнеров](#лимит-логов-для-docker-контейнеров)
 - [Auto login (KDE)](#auto-login-kde)
   - [Без шифрования](#без-шифрования)
     - [Настройка](#настройка)
@@ -11,6 +18,106 @@
     - [Настройка](#настройка-1)
 
 </details>
+
+# Установщик AUR
+AUR - пользовательский репозиторий ARCH (дистрибутив на котором основан CachyOS). В нем пользователи могу публиковать свои собственные приложения, которых нет в официальном репозитории.
+
+> [!warning]
+> Не стоит качать оттуда всё подряд, репозиторий из-за того что общедоступный содержит вирусные приложения, поэтому в том что вы качаете, нужно быть предельно аккуратным.
+
+Открыть консоль и выполнить
+```shell
+sudo pacman -S yay
+```
+
+# Установка Google Chrome
+Google Chrome браузер - думаю что-то дополнительно говорить излишне.
+
+**Предварительные требования**
+- Установщик AUR (paru или yay)
+
+```shell
+yay -S google-chrome
+```
+
+# Установка docker и docker-compose
+Docker - средство для управления контейнерами (изолированными процессами и ресурсами) (практически как ВМ, но без эмуляции "железа"). Так как в официальной документации нет информации по установке в arch-based дистрибутивы, то весь наиболее используемый набор ставится этой командой:
+```shell
+sudo pacman -S --needed docker docker-buildx docker-compose
+```
+
+## Донастройка
+### Добавление в группу docker
+```shell
+sudo groupadd docker || true
+# Вообще конечно выдавать себе права docker это не лучшая идея, потому что они эквивалентны root. Но без них пользоваться docker будет та еще каторга с постоянным вводом sudo и без автодополнения
+sudo usermod -aG docker $USER
+```
+
+### Включение docker демона при запуске системы
+Проверка что демон (фоновый процесс) включился
+```shell
+sudo systemctl enable --now docker
+systemctl status docker
+```
+
+### Лимит логов для docker контейнеров
+Ограничить лимит логов, чтобы логи контейнеров не сожрали всё доступное место
+```shell
+sudo mkdir -p /etc/docker
+sudo nano /etc/docker/daemon.json
+```
+Добавить в файл следующее содержимое
+```json
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "5"
+  }
+}
+```
+
+Перезапустить демон докера
+```shell
+sudo systemctl daemon-reload && sudo systemctl restart docker
+```
+
+Проверить что докер работает
+```shell
+docker run -it --rm hello-world
+```
+
+Должно быть выведено что-то такое
+```
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+17eec7bbc9d7: Pull complete 
+ea52d2000f90: Download complete 
+Digest: sha256:ef54e839ef541993b4e87f25e752f7cf4238fa55f017957c2eb44077083d7a6a
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+```
 
 # Auto login (KDE)
 
@@ -63,7 +170,7 @@
 
 ### Настройка
 
-Предварительные требования
+**Предварительные требования**
 - Установщик AUR (paru или yay)
 
 0. Сделайте снапшот или бекап
