@@ -50,6 +50,56 @@ sudo pacman -S yay
 > [!NOTE]
 > Когда вы устанавливаете что-то через yay, зачастую будет достаточно просто везде прокликать `Enter`.
 
+# Исправление неправильного времени при dualboot
+<details>
+
+<summary>tags</summary>
+
+`time`, `fix time`, `wrong time`, `dualboot`, `dual boot`, `UTC`, `RTC`, `local time`
+
+</details>
+
+Проблема заключается в том, как windows и linux воспринимают время. Подробнее можно прочитать [здесь](https://www.howtogeek.com/323390/how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/) и [здесь](https://itsfoss.com/wrong-time-dual-boot/)
+
+Для  исправления нужно:
+1. Загрузиться в Linux
+```shell
+sudo timedatectl set-local-rtc 1 --adjust-system-clock
+```
+> [!NOTE]
+> Здесь выведет warning, что rtc в local time не очень хорошо поддерживается. Можно забить. В противном случае придется менять время в windows через реестр, что работает в разы хуже.
+
+2. Вывести текущее значение
+```shell
+timedatectl
+```
+Выведет что-то такое:
+```shell
+               Local time: Пн 2026-03-09 10:48:26 MSK
+           Universal time: Пн 2026-03-09 07:48:26 UTC
+                 RTC time: Пн 2026-03-09 07:48:26 # обратить внимание сюда. У меня здесь время не поменялось
+                 # RTC time: Пн 2026-03-09 10:48:26 # а должно быть вот так. Если у вас также для этого читать ниже
+                Time zone: Europe/Moscow (MSK, +0300)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: yes
+ 
+Warning: The system is configured to read the RTC time in the local time zone.
+         This mode cannot be fully supported. It will create various problems
+         with time zone changes and daylight saving time adjustments. The RTC
+         time is never updated, it relies on external facilities to maintain it.
+         If at all possible, use RTC in UTC by calling
+         'timedatectl set-local-rtc 0'.
+```
+
+3. Если время в `RTC time` все еще хранится в формате `Universal time`, то нужно
+   - Перезагрузиться в windows
+   - Синхронизировать время (оно там будет опять неправильное)
+   - Перезагрузиться в Linux и посмотреть опять на `timedatectl`. Должно стать корректным.
+
+> [!NOTE]
+> простая перезагрузка Linux мне не помогла, нужно было именно синхронизировать время в Windows.
+
 # Установка Google Chrome
 <details>
 
