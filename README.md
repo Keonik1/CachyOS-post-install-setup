@@ -23,6 +23,12 @@
 - [Установка аналога Paint (KolourPaint)](#установка-аналога-paint-kolourpaint)
 - [Установка OBS (запись видео)](#установка-obs-запись-видео)
 - [Установка Visual Studio Code (VSCode)](#установка-visual-studio-code-vscode)
+- [Установка средств удаленного подключения](#установка-средств-удаленного-подключения)
+  - [Rustdesk](#rustdesk)
+    - [Дополнительная (обязательная) настройка](#дополнительная-обязательная-настройка)
+  - [Teamviewer](#teamviewer)
+  - [KDE RDP](#kde-rdp)
+  - [SSH-сервер](#ssh-сервер)
 - [Установка docker и docker-compose](#установка-docker-и-docker-compose)
   - [Донастройка](#донастройка)
     - [Добавление в группу docker](#добавление-в-группу-docker)
@@ -35,6 +41,8 @@
     - [Настройка](#настройка-1)
 - [Прочее](#прочее)
   - [VI not found. Editor not found (/usr/bin/vi)](#vi-not-found-editor-not-found-usrbinvi)
+  - [Отправка системных уведомлений](#отправка-системных-уведомлений)
+  - [Стим отображает уведомления не в углу монитора](#стим-отображает-уведомления-не-в-углу-монитора)
 
 </details>
 
@@ -44,7 +52,7 @@
 
 <summary>tags</summary>
 
-`sudo`, `sudo timeout`
+`sudo`, `sudo timeout`, `system`, `security`
 
 </details>
 
@@ -70,6 +78,8 @@ AUR - пользовательский репозиторий ARCH (дистри
 > [!WARNING]
 > Не стоит качать оттуда всё подряд, репозиторий из-за того что общедоступный содержит вирусные приложения, поэтому в том что вы качаете, нужно быть предельно аккуратным.
 
+По идее в CachyOS уже предустановлен `paru`, поэтому ниже будет установлен `yay`. В дальнейших руководствах также будет использован `yay`
+
 Открыть консоль и выполнить
 ```shell
 sudo pacman -S yay
@@ -88,7 +98,7 @@ yay --save --answerdiff None
 
 <summary>tags</summary>
 
-`time`, `fix time`, `wrong time`, `dualboot`, `dual boot`, `UTC`, `RTC`, `local time`
+`time`, `fix time`, `wrong time`, `dualboot`, `dual boot`, `UTC`, `RTC`, `local time`, `system`
 
 </details>
 
@@ -138,7 +148,7 @@ Warning: The system is configured to read the RTC time in the local time zone.
 
 <summary>tags</summary>
 
-`konsole` `delete word` `CTRL+Backspace`
+`konsole` `delete word` `CTRL+Backspace`, `shell`
 
 </details>
 
@@ -157,7 +167,7 @@ Warning: The system is configured to read the RTC time in the local time zone.
 
 <summary>tags</summary>
 
-`change shell`, `fish`, `bash`, `zsh`, `vscode stuck sudo vim` `vscode stuck sudo nano`
+`change shell`, `fish`, `bash`, `zsh`, `vscode stuck sudo vim` `vscode stuck sudo nano`, `shell`
 
 </details>
 
@@ -188,7 +198,7 @@ chsh -s /usr/bin/bash
 
 <summary>tags</summary>
 
-`chrome`, `google chrome`, `google-chrome`, `browsers`
+`chrome`, `google chrome`, `google-chrome`, `browsers`, `install`
 
 </details>
 
@@ -207,7 +217,7 @@ yay -S google-chrome
 
 <summary>tags</summary>
 
-`discord`, `messanger`
+`discord`, `messanger`, `install`
 
 </details>
 Discord - думаю что-то дополнительно говорить излишне
@@ -244,7 +254,7 @@ nano ~/.config/discord/settings.json
 
 <summary>tags</summary>
 
-`telegram`, `messanger`
+`telegram`, `messanger`, `install`
 
 </details>
 
@@ -259,7 +269,7 @@ sudo pacman -S --needed telegram-desktop
 
 <summary>tags</summary>
 
-`wireuard`, `wireguard vpn`, `vpn`
+`wireuard`, `wireguard vpn`, `vpn`, `network`, `system`
 
 </details>
 
@@ -317,7 +327,7 @@ sudo pacman -S --needed telegram-desktop
 
 <summary>tags</summary>
 
-`throne`, `throne vpn`, `vpn`, `xray`, `nekoray`, `v2ray`, `nekobox`, `vless`
+`throne`, `throne vpn`, `vpn`, `xray`, `nekoray`, `v2ray`, `nekobox`, `vless`, `network`, `system`
 
 </details>
 
@@ -336,7 +346,7 @@ yay -S throne
 
 <summary>tags</summary>
 
-`paint`, `KolourPaint`, `draw`
+`paint`, `KolourPaint`, `draw`, `install`
 
 </details>
 
@@ -350,7 +360,7 @@ sudo pacman -S --needed kolourpaint
 
 <summary>tags</summary>
 
-`obs`, `video recording`
+`obs`, `video recording`, `install`
 
 </details>
 
@@ -374,7 +384,7 @@ sudo pacman -S obs-studio-browser
 
 <summary>tags</summary>
 
-`vscode`, `visual studio`, `vs code`, `visual studio code`, `text editor`
+`vscode`, `visual studio`, `vs code`, `visual studio code`, `text editor`, `install`
 
 </details>
 
@@ -388,12 +398,142 @@ VSCode - один из самых популярных текстовых ред
 yay -S visual-studio-code-bin
 ```
 
+# Установка средств удаленного подключения
+> [!IMPORTANT]
+> Есть определенная проблема со средствами удаленного рабочего стола в wayland. Далеко не все работают, например, на момент написания anydesk не работал. 
+
+## Rustdesk
+<details>
+
+<summary>tags</summary>
+
+`Remote Desktop`, `rustdesk`, `remote access`, `install`
+
+</details>
+
+[Сайт](https://rustdesk.com/)
+
+Был проверен, можно подключаться с web, телефона и другого компьютера. Не везде идеально и есть нарикания, но имеем что имеем.
+
+**Предварительные требования**
+- [Установщик AUR (paru или yay)](#установщик-aur)
+
+**Установка**
+```shell
+yay -S rustdesk-bin
+```
+
+### Дополнительная (обязательная) настройка
+**Автозапуск**
+```shell
+# Включение автозапуска
+sudo systemctl enable rustdesk.service
+
+# Отключение автозапуска
+sudo systemctl disable rustdesk.service
+```
+> [!WARNING]
+> Иногда может потребоваться в начале все равно выполнить `rustdesk` в консоли в первый раз, чтобы служба нормально начала работать потом. Особенно, если вы нажали "Остановить службу".
+
+**Подключение по постоянному паролю**
+1. Открыть меню настроек (три полоски справа сверху)
+2. Безопасность -> Секция `Пароль`
+3. Выставить пункт `Использовать оба пароля` или `Использовать постоянный пароль`
+4. Нажать на кнопку `Уставноить постоянный пароль` и ввести пароль
+
+Возможно можно входить еще и по аккаунту, но я не пробовал
+
+**Настройка экранов**
+> [!IMPORTANT]
+> При первом подключении вы должны выбрать какой экран использовать он будет использоваться в том числе для последующих подключений. Я не нашел как это поменять во время уже запущенного сеанса.
+>
+> Также если требуется поменять экран нужно перейти в настройки -> `Общее` -> Секция `Wayland` -> `Отменить выбор экрана Wayland`. После чего, пр подключении будет запрос на показ экрана.
+
+Здесь советую при первом запуске выбрать использование главного монитора, потому что в противном случае будет или сразу два показываться одновременно, либо выдавать ошибку о получении информации о мониторе.
+
+Если вы выбрали кривые настройки, то нужно сбросить их (см. выше Important блок). Иногда потребуется запустить клиент, а еще иногда вообще сервер.
+
+Есть настройки `Показывать дисплеи в отдельных окнах`, `Показывать мониторы на панели инструментов` и `Использовать все мои мониторы для удаленного сеанса`, но оно похоже не работают, по крайней мере с телефона.
+
+**Прочее**
+- Если вы нажали "Остановить службу", то нужно сначала в консоли запустить `rundesk`, в появившемся окне снизу тыкнуть `запустить службу`, закрыть приложение и после этого перезапустить службу через `systemctl start`. Иначе приложение просто не открывается.
+- Советую отключить в настройках безопасности передачу звука
+- Советую включить в настройках безопасности удаленное изменение конфигурации
+
+**Странности поведения**
+- не работает или непонятно как работает подключение к сетапу с несколькими мониторами
+- Wayland косячный со всех сторон
+- все косяки что были упомянуты выше
+
+## Teamviewer
+<details>
+
+<summary>tags</summary>
+
+`Remote Desktop`, `teamviewer`, `remote access`, `install`, `unresolved`
+
+</details>
+
+[Сайт](https://www.teamviewer.com/)
+
+У меня не получилось подключиться (тестил с телефона), было бесконечное подключение. Почему так - выяснить не удалось.
+
+**Предварительные требования**
+- [Установщик AUR (paru или yay)](#установщик-aur)
+
+**Установка**
+```shell
+yay -S teamviewer
+```
+
+## KDE RDP
+<details>
+
+<summary>tags</summary>
+
+`Remote Desktop`, `RDP`, `remote access`, `KRDP`, `system`, `install`, `KDE`, `KDE RDP`
+
+</details>
+> [!WARNING]
+> Может потребовать настроить или отключить firewall
+
+> [!NOTE]
+> Работает только в локальной сети, через VPN или при наличии публичного IP-адреса
+
+```shell
+sudo pacman -S krdp
+```
+
+1. Зайти в настройки системы -> Секция `Сеть и связь` -> `Удаленный рабочий стол`
+2. Включить вашего пользователя -> нажать `Применить`
+3. Активировать ползунок спарава сверху `Включить RDP-сервер`
+4. (Опционально) Поставить галку `Автозапуск при входе`
+5. Применить
+
+## SSH-сервер
+<details>
+
+<summary>tags</summary>
+
+`Remote Desktop`, `ssh`, `remote access`, `ssh-server`, `system`, `install`
+
+</details>
+> [!WARNING]
+> Может потребовать настроить или отключить firewall
+
+```shell
+sudo systemctl enable --now sshd
+```
+
+> [!IMPORTANT]
+> Здесь не будут приведены настройки для того чтобы сделать ssh сервер более безопасным, потому что подразумевается, что вы будете его использовать без выставления наружу в интернет, а исключительно в домашних целях (впадлу вставать с дивана, подрубились по ssh с телефона и выключили компьютер). ДЛя более безопасной настройки загуглите статьи или посмотрите на ютубе.
+
 # Установка docker и docker-compose
 <details>
 
 <summary>tags</summary>
 
-`docker`, `docker-compose`, `docker-build`, `containers`
+`docker`, `docker-compose`, `docker-build`, `containers`, `system`, `install`
 
 </details>
 
@@ -488,7 +628,7 @@ For more examples and ideas, visit:
 
 <summary>Tags</summary>
 
-`autologin`, `auto login`, `plasma autologin`, `sddm autologin`, `kde autologin`, `cachyos autologin`, `pam_autologin`, `pam autologin`, `kwallet autologin`, `kwallet-pam`, `kdewallet autologin`
+`autologin`, `auto login`, `plasma autologin`, `sddm autologin`, `kde autologin`, `cachyos autologin`, `pam_autologin`, `pam autologin`, `kwallet autologin`, `kwallet-pam`, `kdewallet autologin`, `system`, `install`
 
 </details>
 
@@ -740,3 +880,25 @@ ln -s /usr/bin/code /usr/bin/vi
 ```
 > [!NOTE]
 > При работе с VSCode зачастую требуется указывать `--wait`, чтобы по закрытию файла он "применился", потому что в ином случае файл откроется, а выполнение скрипта/программы продолжится, что может вызвать некорректное поведение
+
+
+## Отправка системных уведомлений
+<details>
+
+<summary>tags</summary>
+
+`notifications`, `other`
+
+</details>
+
+```shell
+notify-send "Hello world!" "This is an example notification." --icon=dialog-information
+```
+
+## Стим отображает уведомления не в углу монитора
+`steam`, `notifications`, `unresolved`
+Есть какой-то баг, что если у вас мониторы разного разрешения и при этом без скейла, то если разместить "мелкий" моник слева, не с самого низа, а например по центру большого, то уведомления стима на главном мониторе (большом) будут отображаться далеко не в углу. Ниже issue на гитхабе
+
+https://github.com/ValveSoftware/steam-for-linux/issues/9374
+
+Как это фиксить, не меняя расположение мониторов и не делая масштабирование, не очень ясно, кому-то помогает переключение на бета версию стима (я не тестил)
