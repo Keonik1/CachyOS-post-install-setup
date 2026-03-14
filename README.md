@@ -896,7 +896,14 @@ notify-send "Hello world!" "This is an example notification." --icon=dialog-info
 ```
 
 ## Стим отображает уведомления не в углу монитора
+<details>
+
+<summary>tags</summary>
+
 `steam`, `notifications`, `unresolved`
+
+</details>
+
 Есть какой-то баг, что если у вас мониторы разного разрешения и при этом без скейла, то если разместить "мелкий" моник слева, не с самого низа, а например по центру большого, то уведомления стима на главном мониторе (большом) будут отображаться далеко не в углу. Ниже issue на гитхабе
 
 https://github.com/ValveSoftware/steam-for-linux/issues/9374
